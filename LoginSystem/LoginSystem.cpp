@@ -57,18 +57,45 @@ int main() {
 
 void registerUser() {
     // Function to register a new user
-    // Prompt the user to input a username and password
+    user newUser;
 
+    // Prompt the user to input a username and password
+    cout << "Enter username: ";
+    cin >> newUser.username;
+    cout << "Enter password: ";
+    cin >> newUser.password;
 
     // Validate the input (e.g., check if the username is already taken)
+    for (const user& user : users) {
+        if (user.username == newUser.username) {
+            cout << "Username already exists. Please choose a different one.\n";
+            return; // Exit function if username is taken
+        }
+    }
+
     // If the input is valid, save the username and password to the 'users' vector
+    users.push_back(newUser);
+    cout << "Registration successful!\n";
 }
 
 bool loginUser() {
     // Function to login an existing user
+    string username, password;
+
     // Prompt the user to input their username and password
+    cout << "Enter username: ";
+    cin >> username;
+    cout << "Enter password: ";
+    cin >> password;
+
     // Check if the entered username exists and if the corresponding password matches
-    // Return true if login is successful, false otherwise
+    for (const user& user : users) {
+        if (user.username == username && user.password == password) {
+            return true; // Login successful
+        }
+    }
+
+    return false; // Login failed
 }
 
 
